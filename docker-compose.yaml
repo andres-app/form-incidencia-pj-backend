@@ -1,0 +1,19 @@
+version: "3"
+services:
+  next-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: poder-judicial-backend
+    container_name: poder-judicial-backend
+    restart: always
+    networks:
+      - luis
+    ports:
+      - 8890:80
+    volumes:
+      - ${PWD}/logs:/etc/app
+
+networks:
+  luis:
+    external: true
