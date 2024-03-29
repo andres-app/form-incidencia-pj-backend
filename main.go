@@ -51,9 +51,40 @@ func main() {
 	router.GET("/", func(c *gin.Context) {
 		log.Println("Endpoint ping")
 
-		c.JSON(http.StatusOK, gin.H{
-			"message": "API GO LANG APP MOVIL UPLA",
-		})
+		htmlResponse := `
+		<!DOCTYPE html>
+		<html lang="es">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Mi Servidor Go</title>
+			<style>
+				body {
+					font-family: Arial, sans-serif;
+					padding: 20px;
+				}
+				.container {
+					max-width: 600px;
+					margin: 0 auto;
+					text-align: center;
+				}
+				.message {
+					font-size: 24px;
+					color: #333;
+				}
+			</style>
+		</head>
+		<body>
+		<div>
+		<h1 style="text-align: center;">Bienvenido a mi Servidor Go</h1>
+		<p style="text-align: center;">&iexcl;<strong>Hola el servicio esta corriendo correctamente&nbsp;</strong>desde mi servidor Go!</p>
+		<p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://openupthecloud.com/wp-content/uploads/2020/01/Golang.png" width="384" height="215" /></p>
+		</div>
+		</body>
+		</html>
+		`
+
+		c.Data(http.StatusOK, "text/html; charset=utf-8", []byte(htmlResponse))
 	})
 	router.POST("/pdf", handlePDFRequestGin)
 	router.GET("/cortecsj", handleListaCsj)
